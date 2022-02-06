@@ -6,7 +6,7 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 10:35:41 by tbouma            #+#    #+#             */
-/*   Updated: 2022/02/06 13:07:45 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/02/06 16:34:58 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include "get_next_line_utils.h"
 #include "get_next_line.h"
+#include <stdio.h>
 
 static char	*make_remainder(char **string)
 {
@@ -78,12 +79,12 @@ char	*get_next_line(int fd)
 	if (!(ft_strchr(string, '\n')) && len_read != 0)
 	{
 		len_read = read(fd, buff, BUFFER_SIZE);
+		if (fd < 0 || len_read < 0)
+			return (NULL);
 		buff[len_read] = '\0';
 	}
 	else
 		buff[0] = '\0';
-	if (fd < 0 || len_read < 0)
-		return (NULL);
 	if (len_read == 0)
 	{
 		temp = string;
