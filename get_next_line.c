@@ -6,13 +6,12 @@
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 10:35:41 by tbouma            #+#    #+#             */
-/*   Updated: 2022/02/06 16:34:58 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/02/07 16:54:57 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 #include <unistd.h>
-#include "get_next_line_utils.h"
 #include "get_next_line.h"
 #include <stdio.h>
 
