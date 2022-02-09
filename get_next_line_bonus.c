@@ -1,17 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tbouma <tbouma@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/21 10:35:41 by tbouma            #+#    #+#             */
-/*   Updated: 2022/02/09 14:09:51 by tbouma           ###   ########.fr       */
+/*   Updated: 2022/02/09 14:13:32 by tbouma           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include <unistd.h>
 #include "get_next_line.h"
+#include <stdio.h>
+#include <limits.h>
 
 static char	*make_remainder(char **string)
 {
@@ -69,13 +72,13 @@ static char	*check_remainder_string(int fd, char *buff,
 
 char	*get_next_line(int fd)
 {
-	static char	*string;
+	static char	*string[OPEN_MAX];
 	char		buff[BUFFER_SIZE + 1];
 	int			len_read;
 	char		*temp;
 
 	len_read = 1;
-	if (!(ft_strchr(string, '\n')))
+	if (!(ft_strchr(string[fd], '\n')))
 	{
 		len_read = read(fd, buff, BUFFER_SIZE);
 		if (fd < 0 || len_read < 0)
@@ -86,9 +89,9 @@ char	*get_next_line(int fd)
 		buff[0] = '\0';
 	if (len_read == 0)
 	{
-		temp = string;
-		string = NULL;
+		temp = string[fd];
+		string[fd] = NULL;
 		return (temp);
 	}
-	return (check_remainder_string(fd, buff, &string));
+	return (check_remainder_string(fd, buff, &string[fd]));
 }
